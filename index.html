@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Love! 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #ffc2d1, #e5c1f0);
+      color: #333;
+    }
+    .center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2em;
+      text-align: center;
+    }
+    h1, h2, p {
+      font-family: 'Pacifico', cursive;
+    }
+    h1.typing, .typing-text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #ff4f9a;
+      animation: typing 4s steps(50, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #ff4f9a; }
+    }
+    .btn {
+      padding: 0.7em 1.5em;
+      margin: 1em;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      color: white;
+    }
+    .yes-btn { background: #f77eb9; }
+    .no-btn { background: #bbb; }
+    .yes-btn:hover { background: #ff4f9a; }
+    .no-btn:hover { background: #999; }
+    .hidden { display: none; }
+    .input-style {
+      padding: 0.5em;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin: 0.5em;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #fff0f5;
+      border: 2px dashed #ff69b4;
+      display: inline-block;
+      margin: 1em;
+      line-height: 100px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 15px;
+    }
+    button.back-btn {
+      margin-top: 2em;
+      background: #ccc;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="center" id="intro">
+  <h1 class="typing">Would you like to open it?</h1>
+  <button class="btn yes-btn" onclick="startExperience()">Yes baby 💘</button>
+  <button class="btn no-btn" onclick="showSadScreen()">No 😢</button>
+</div>
+
+<div class="center hidden" id="sad">
+  <p style="font-size:2em; color:#cc3366;">NOOO, GIVE ME ANOTHER CHANCE 😭</p>
+  <button class="btn back-btn" onclick="goBack()">Back to Intro</button>
+</div>
+
+<div class="center hidden" id="guess-game">
+  <h2>Guess the word! 💌</h2>
+  <p>Hint: Something you call me 😚</p>
+  <input class="input-style" id="guessInput" placeholder="Type your guess here...">
+  <button class="btn yes-btn" onclick="checkGuess()">Submit</button>
+  <p id="guessResult"></p>
+</div>
+
+<div class="center hidden" id="gift-game">
+  <h2>Find your gift 🎁</h2>
+  <div>
+    <div class="box" onclick="checkGift(true)">🎁</div>
+    <div class="box" onclick="checkGift(false)">🎁</div>
+  </div>
+  <p id="giftResult"></p>
+</div>
+
+<div class="center hidden" id="final-message">
+  <h2 class="typing-text">HAPPY BIRTHDAY, MY LOVE!! 🎉</h2>
+  <p style="font-size: 1.2em; max-width: 600px;">
+    Today’s your special day, and I just want to remind you how grateful I am to have you in my life. Out of everyone in the world, I somehow ended up with the most amazing person to call mine — and that’s something I’ll never take for granted.<br><br>
+    Thank you for always being there for me — for your patience, your hugs, your late-night chika, and even your corny jokes that somehow never fail to make me laugh. You have no idea how much light, comfort, and peace you bring into my life just by being you.<br><br>
+    I’ll always be here for you — through your highs, your lows, and everything in between. I’m so excited for all the adventures that still lie ahead of us, and I promise to keep cheering you on in everything you do.<br><br>
+    Happy birthday, babe. I love you more than words can ever say. 💖
+  </p>
+  <button class="btn yes-btn" onclick="showJoke()">Next 💘</button>
+</div>
+
+<div class="center hidden" id="joke-page">
+  <h2>"Gusto mo ng surprise?"</h2>
+  <p>Buksan mo zipper... ng bag ko, may chocolates ako for you. HAHAHAHAHAH I LOVE YOU SO MUCH</p>
+  <button class="btn back-btn" onclick="goBack()">Back to Intro</button>
+</div>
+
+<script>
+  function showSadScreen() {
+    hideAll();
+    document.getElementById("sad").classList.remove("hidden");
+  }
+  function startExperience() {
+    hideAll();
+    document.getElementById("guess-game").classList.remove("hidden");
+  }
+  function checkGuess() {
+    const input = document.getElementById("guessInput").value.trim().toLowerCase();
+    const result = document.getElementById("guessResult");
+    if (input === "baby" || input === "babe") {
+      result.textContent = "Correct! 🎉";
+      setTimeout(() => {
+        hideAll();
+        document.getElementById("gift-game").classList.remove("hidden");
+      }, 1000);
+    } else {
+      result.textContent = "Hmm try again 😘";
+    }
+  }
+  function checkGift(isCorrect) {
+    const result = document.getElementById("giftResult");
+    if (isCorrect) {
+      result.textContent = "Yay! You found it! 🎁💖";
+      setTimeout(() => {
+        hideAll();
+        document.getElementById("final-message").classList.remove("hidden");
+      }, 1500);
+    } else {
+      result.textContent = "Not here! Try again 🫣";
+    }
+  }
+  function showJoke() {
+    hideAll();
+    document.getElementById("joke-page").classList.remove("hidden");
+  }
+  function goBack() {
+    hideAll();
+    document.getElementById("intro").classList.remove("hidden");
+  }
+  function hideAll() {
+    document.querySelectorAll(".center").forEach(e => e.classList.add("hidden"));
+  }
+</script>
+
+</body>
+</html>
